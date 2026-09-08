@@ -13,7 +13,7 @@ CREATE TABLE tb_category
     description VARCHAR(500),
     use_yn CHAR(1) NOT NULL DEFAULT 'Y',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
+    last_updated_at DATETIME,
     PRIMARY KEY (category_id)
 );
 
@@ -27,3 +27,12 @@ VALUES
 ('SPRING', 'Spring Framework 학습', 'Y'),
 ('REACT', 'React 학습', 'Y'),
 ('DATABASE', 'Database 학습', 'Y');
+
+COMMIT;
+select category_id
+			  ,category_name
+			  ,description
+			  ,use_yn
+			  ,created_at
+		  from tb_category
+		  order by category_id desc

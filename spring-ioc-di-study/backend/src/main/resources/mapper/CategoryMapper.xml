@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.iocdi.mapper.CategoryMapper">
+    <select id="findAll"
+            resultType="com.example.iocdi.domain.Category">
+        select category_id
+             ,category_name
+             ,description
+             ,use_yn
+             ,created_at
+        from tb_category
+        order by category_id desc
+    </select>
+	<select id="findById"
+			parameterType="long"
+			resultType="com.example.iocdi.domain.Category">
+	    select category_id
+             ,category_name
+             ,description
+             ,use_yn
+             ,created_at
+        from tb_category
+        where category_id = #{categoryId}
+	</select>
+	  <insert id="insert"
+            parameterType="com.example.iocdi.dto.CategoryRequest">
+
+        INSERT INTO tb_category
+        (
+              category_name
+            , description
+            , use_yn
+            , created_at
+        )
+        VALUES
+        (
+              #{categoryName}
+            , #{description}
+            , 'Y'
+            , NOW()
+        )
+
+    </insert>
+    <delete id="delete"
+            parameterType="long">
+        DELETE
+        FROM tb_category
+        WHERE category_id = #{categoryId}
+    </delete>
+	<update id="update"
+			parameterType="long">
+		UPDATE tb_category
+		   SET category_name=#{categoryName},
+		       description=#{description},
+			   use_yn=#{useYn},
+			   last_updated_at=NOW()
+		 WHERE category_id = #{categoryId}		
+	</update>
+</mapper>
